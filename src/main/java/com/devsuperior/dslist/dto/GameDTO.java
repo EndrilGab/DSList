@@ -1,51 +1,30 @@
-package com.devsuperior.dslist.entities;
+package com.devsuperior.dslist.dto;
 
-import jakarta.persistence.*;
+import com.devsuperior.dslist.entities.Game;
+import org.springframework.beans.BeanUtils;
 
-import java.util.Objects;
+public class GameDTO {
 
-@Entity
-@Table(name = "tb_game")
-public class Game {
-
-    @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String title;
-
-    @Column(name = "game_year")
     private Integer year;
     private String platforms;
     private Double score;
     private String genre;
     private String imgUrl;
-
-    @Column(columnDefinition = "TEXT")
     private String shortDescription;
-
-    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
-    public Game() {
+    public GameDTO() {
     }
 
-    public Game(Long id, String title, Integer year, String platforms, Double score, String genre, String imgUrl, String shortDescription, String longDescription) {
-        this.id = id;
-        this.title = title;
-        this.year = year;
-        this.platforms = platforms;
-        this.score = score;
-        this.genre = genre;
-        this.imgUrl = imgUrl;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
+    public GameDTO(Game entity){
+        BeanUtils.copyProperties(entity, this);
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -53,7 +32,6 @@ public class Game {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -61,7 +39,6 @@ public class Game {
     public Integer getYear() {
         return year;
     }
-
     public void setYear(Integer year) {
         this.year = year;
     }
@@ -69,14 +46,13 @@ public class Game {
     public String getPlatforms() {
         return platforms;
     }
-
-    public void setPlatforms(String platform) {
-        this.platforms = platform;
+    public void setPlatforms(String platforms) {
+        this.platforms = platforms;
     }
+
     public Double getScore() {
         return score;
     }
-
     public void setScore(Double score) {
         this.score = score;
     }
@@ -84,7 +60,6 @@ public class Game {
     public String getGenre() {
         return genre;
     }
-
     public void setGenre(String genre) {
         this.genre = genre;
     }
@@ -92,7 +67,6 @@ public class Game {
     public String getImgUrl() {
         return imgUrl;
     }
-
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
@@ -100,7 +74,6 @@ public class Game {
     public String getShortDescription() {
         return shortDescription;
     }
-
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
     }
@@ -108,21 +81,9 @@ public class Game {
     public String getLongDescription() {
         return longDescription;
     }
-
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Game game = (Game) obj;
-        return Objects.equals(id, game.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
 }
